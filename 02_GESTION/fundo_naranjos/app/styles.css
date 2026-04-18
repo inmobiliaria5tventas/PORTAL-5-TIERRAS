@@ -15,8 +15,8 @@
 /* ── Reset & Base ── */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { width: 100%; height: 100%; margin: 0; padding: 0; }
-body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-primary); overflow: hidden; -webkit-tap-highlight-color: transparent; }
-#app { width: 100%; height: 100vh; position: relative; overflow: hidden; }
+body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-primary); height: 100vh; height: 100dvh; overflow: hidden; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
+#app { width: 100%; height: 100vh; height: 100dvh; position: relative; overflow: hidden; }
 
 /* ── Layout & UI ── */
 .app-header { position: absolute; top: 0; left: 0; right: 0; z-index: 10; padding: 15px; background: linear-gradient(to bottom, rgba(15,23,42,0.9), transparent); pointer-events: none; }
@@ -24,13 +24,16 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(
 .back-btn { background: var(--surface); width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; text-decoration: none; color: white; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 4px 12px rgba(0,0,0,0.3); transition: 0.2s; }
 .back-btn:active { transform: scale(0.9); }
 
-.search-container { position: absolute; top: 70px; left: 50%; z-index: 10; display: flex; gap: 8px; width: min(calc(100% - 30px), 500px); transform: translateX(-50%); filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3)); }
-.search-input { flex: 1; height: 48px; background: var(--surface); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 0 15px; color: white; font-size: 16px; outline: none; transition: 0.2s; }
+.search-container { position: absolute; top: 65px; left: 15px; z-index: 1000; display: flex; gap: 8px; width: calc(100% - 150px); max-width: 250px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3)); }
+.search-input { flex: 1; height: 36px; background: var(--surface); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 0 12px; color: white; font-size: 14px; outline: none; transition: 0.2s; }
 .search-input:focus { border-color: var(--accent-blue); }
-.search-btn { width: 48px; height: 48px; background: var(--accent-blue); border: none; border-radius: 14px; color: white; font-size: 18px; cursor: pointer; }
+.search-btn { width: 36px; height: 36px; background: var(--accent-blue); border: none; border-radius: 10px; color: white; font-size: 16px; cursor: pointer; }
+
+/* Tools Row */
+.header-tools { position: absolute; top: 65px; right: 15px; z-index: 1000; display: flex; gap: 8px; align-items: center; }
 
 /* ── Map ── */
-#map { width: 100%; height: 100vh; z-index: 1; background: var(--bg-dark); }
+#map { width: 100%; height: 100%; height: 100dvh; z-index: 1; background: var(--bg-dark); position: absolute; top: 0; left: 0; }
 .leaflet-top { top: 120px !important; }
 .map-low-zoom .lote-label { display: none !important; }
 .lote-label { background: none!important; border: none!important; box-shadow: none!important; font-family: 'Outfit', sans-serif!important; font-weight: 700!important; font-size: 11px!important; color: #fff!important; text-shadow: 0 1px 3px rgba(0,0,0,0.8)!important; text-align: center!important; }

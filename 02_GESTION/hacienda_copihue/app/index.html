@@ -34,9 +34,8 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); height: 100vh; overflow: hidden; }
-
-        #map { width: 100%; height: 100%; background: #000; z-index: 1; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); height: 100vh; height: 100dvh; overflow: hidden; margin: 0; padding: 0; }
+        #map { width: 100%; height: 100%; height: 100dvh; background: #000; z-index: 1; position: absolute; top: 0; left: 0; }
 
         .app-header {
             position: absolute; top: 0; left: 0; right: 0; z-index: 10;
@@ -47,12 +46,18 @@
         .back-btn { background: var(--surface); width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; text-decoration: none; color: white; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
 
         .search-container {
-            position: absolute; top: 70px; left: 50%; z-index: 10;
+            position: absolute; top: 65px; left: 15px; z-index: 1000;
             display: flex; gap: 8px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
-            width: min(calc(100% - 30px), 500px); transform: translateX(-50%);
+            width: calc(100% - 150px); max-width: 250px;
         }
-        .search-input { flex: 1; height: 48px; background: var(--surface); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 0 15px; color: white; font-size: 16px; font-family: inherit; }
-        .search-btn { width: 48px; height: 48px; background: var(--primary); border: none; border-radius: 14px; color: white; font-size: 18px; }
+        .search-input { flex: 1; height: 36px; background: var(--surface); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 0 12px; color: white; font-size: 14px; font-family: inherit; }
+        .search-btn { width: 36px; height: 36px; background: var(--primary); border: none; border-radius: 10px; color: white; font-size: 16px; }
+
+        /* Tools Row - To the right of Search */
+        .header-tools {
+            position: absolute; top: 65px; right: 15px; z-index: 1000;
+            display: flex; gap: 8px; align-items: center;
+        }
 
         .stats-bar {
             position: absolute; bottom: 20px; left: 50%; z-index: 10;
@@ -225,21 +230,22 @@
         .loading-bar-inner { width: 0%; height: 100%; background: var(--primary); transition: width 0.4s ease; }
 
         /* Sync Indicator - Moved to avoid overlap */
+        /* Sync Indicator - Grouped with tools */
         .sync-indicator { 
             position: absolute; 
             top: 15px; 
-            right: 230px; /* Shifted left to clear project info */
+            right: 15px; 
             z-index: 1000; 
-            width: 36px; 
-            height: 36px; 
-            background: rgba(30, 41, 59, 0.8); 
+            width: 34px; 
+            height: 34px; 
+            background: rgba(30, 41, 59, 0.7); 
             backdrop-filter: blur(8px);
             border-radius: 10px; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
             border: 1px solid rgba(255,255,255,0.1); 
-            font-size: 16px; 
+            font-size: 14px; 
             box-shadow: 0 4px 12px rgba(0,0,0,0.3); 
         }
         .sync-indicator--syncing { color: var(--primary); animation: spin 2s linear infinite; }
@@ -256,42 +262,37 @@
     <div class="loading-screen">
         <img src="../../../04_RECURSOS/Logos/El Copihue.png" class="loading-logo" alt="Logo">
         <div class="loading-bar"><div class="loading-bar-inner"></div></div>
-    </div>
-
-    <header class="app-header">
+    </div>    <header class="app-header">
         <div class="header-content">
-            <a href="../../index.html" class="back-btn"><i class="fa-solid fa-chevron-left"></i></a>
-            
-            <div style="display: flex; gap: 10px; align-items: center;">
-                <button id="header-populate-btn" class="back-btn" title="Poblar Excel desde App" style="pointer-events: auto; color: #4f46e5;">
-                    <i class="fa-solid fa-cloud-arrow-up"></i>
-                </button>
-                <div style="text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; padding-top: 5px;">
-                    <div style="text-align: right; margin-bottom: 2px;">
-                        <div style="font-size: 10px; color: var(--text-dim); letter-spacing: 1px; font-weight: 700;">PROYECTO</div>
-                        <div style="font-size: 16px; font-weight: 800; line-height: 1.1; color: #fff;">El Copihue</div>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <a href="../../../01_CLIENTES/hacienda_copihue/app/index.html" target="_blank" class="public-link" style="padding: 5px 10px; font-size: 11px;">
-                            <i class="fa-solid fa-external-link"></i> Público
-                        </a>
-                        <img src="../../../04_RECURSOS/5T.jfif" style="height: 24px; border-radius: 4px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));" alt="Logo 5T">
-                    </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <a href="../../index.html" class="back-btn" style="width: 36px; height: 36px; border-radius: 10px;"><i class="fa-solid fa-chevron-left"></i></a>
+                <div style="display: flex; flex-direction: column;">
+                    <div style="font-size: 8px; color: var(--text-dim); font-weight: 700; letter-spacing: 0.5px;">GESTIÓN</div>
+                    <div style="font-size: 14px; font-weight: 800; color: #fff;">El Copihue</div>
                 </div>
             </div>
         </div>
     </header>
 
     <div class="search-container">
-        <input type="text" id="search-input" class="search-input" placeholder="Buscar lote (ej: 42)..." inputmode="numeric">
+        <input type="text" id="search-input" class="search-input" placeholder="Lote..." inputmode="numeric">
         <button id="search-btn" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+
+    <div class="header-tools">
+        <a href="../../../01_CLIENTES/hacienda_copihue/app/index.html" target="_blank" class="public-link" style="padding: 6px 10px; font-size: 10px; border-radius: 8px; background: rgba(34, 197, 94, 0.2);">
+            <i class="fa-solid fa-external-link"></i> Público
+        </a>
+        <button id="header-populate-btn" class="back-btn" title="Subir datos al Excel" style="width: 36px; height: 36px; border-radius: 10px; font-size: 14px; color: #818cf8; background: var(--surface);">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+        </button>
     </div>
 
     <button id="fab-locate" class="fab fab--locate">
         <i class="fa-solid fa-location-crosshairs"></i>
     </button>
 
-    <div id="sync-indicator" class="sync-indicator"><i class="fa-solid fa-cloud"></i></div>
+    <div id="sync-indicator" class="sync-indicator"><i class="fa-solid fa-cloud"></i></div>iv>
     <div id="map"></div>
 
     <div class="stats-bar">
