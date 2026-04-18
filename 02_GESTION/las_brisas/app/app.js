@@ -299,11 +299,12 @@
         document.querySelectorAll('.status-btn').forEach(btn => {
             btn.addEventListener('click', () => changeStatus(btn.dataset.estado));
         });
-        document.getElementById('search-btn').addEventListener('click', searchLote);
-        document.getElementById('search-input').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') searchLote();
-        });
-        document.getElementById('fab-locate').addEventListener('click', locateUser);
+        // document.getElementById('search-btn').addEventListener('click', searchLote);
+        // document.getElementById('search-input').addEventListener('keypress', (e) => {
+        //     if (e.key === 'Enter') searchLote();
+        // });
+        const locateBtn = document.getElementById('fab-locate');
+        if (locateBtn) locateBtn.addEventListener('click', locateUser);
 
         // Comment toggle
         document.getElementById('comment-toggle-btn').addEventListener('click', () => {
