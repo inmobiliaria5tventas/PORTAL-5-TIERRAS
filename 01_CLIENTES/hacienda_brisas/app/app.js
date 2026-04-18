@@ -97,6 +97,9 @@
             if (!e.originalEvent._loteClicked) closeBottomSheet();
         });
 
+        map.on('locationfound', onLocationFound);
+        map.on('locationerror', onLocationError);
+        
         map.on('zoomend', updateZoomClass);
         updateZoomClass();
     }
@@ -199,13 +202,33 @@
     function setupEventListeners() {
         document.getElementById('bs-close').addEventListener('click', closeBottomSheet);
         document.getElementById('bottomsheet-overlay').addEventListener('click', closeBottomSheet);
-        document.getElementById('search-btn').addEventListener('click', searchLote);
-        document.getElementById('search-input').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') searchLote();
+        
+        const locateBtn = document.getElementById('fab-locate');
+        if (locateBtn) locateBtn.addEventListener('click', locateUser);
+    }
+
+    function locateUser() {
+        const btn = document.getElementById('fab-locate');
+        if (btn) btn.classList.add('locating');
+        map.locate({ setView: true, maxZoom: 18 });
+    }
+
+    function onLocationFound(e) {
+        const btn = document.getElementById('fab-locate');
+        if (btn) btn.classList.remove('locating');
+        if (userMarker) map.removeLayer(userMarker);
+        const gpsIcon = L.divIcon({
+            className: 'gps-marker',
+            html: '<div class="gps-marker__pulse"></div><div class="gps-marker__dot"></div>',
+            iconSize: [40, 40], iconAnchor: [20, 20]
         });
-        document.getElementById('fab-locate').addEventListener('click', () => {
-            map.locate({ setView: true, maxZoom: 18 });
-        });
+        userMarker = L.marker(e.latlng, { icon: gpsIcon }).addTo(map);
+    }
+
+    function onLocationError(e) {
+        const btn = document.getElementById('fab-locate');
+        if (btn) btn.classList.remove('locating');
+        alert('No se pudo obtener la ubicación. Asegúrese de tener el GPS activado y dar permisos.');
     }
 
     function searchLote() {
