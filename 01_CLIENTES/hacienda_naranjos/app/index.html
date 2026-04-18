@@ -108,11 +108,20 @@
         /* Labels */
         .lote-label { background: transparent !important; border: none !important; box-shadow: none !important; color: white !important; font-weight: 800 !important; text-shadow: 0 0 4px rgba(0,0,0,0.8), 0 0 2px rgba(0,0,0,1) !important; pointer-events: none !important; font-size: 11px; }
         .map-low-zoom .lote-label { display: none !important; }
+
+        /* GPS Marker Styles */
+        .gps-marker { display: flex; align-items: center; justify-content: center; }
+        .gps-marker__dot { width: 14px; height: 14px; background: #3b82f6; border: 2px solid white; border-radius: 50%; box-shadow: 0 0 10px rgba(59, 130, 246, 0.5); z-index: 2; }
+        .gps-marker__pulse { position: absolute; width: 35px; height: 35px; background: rgba(59, 130, 246, 0.3); border-radius: 50%; animation: gpsPulse 2s infinite; z-index: 1; }
+        @keyframes gpsPulse { 0% { transform: scale(0.5); opacity: 1; } 100% { transform: scale(2); opacity: 0; } }
     </style>
 </head>
 <body>
     <div class="loading-screen">
-        <img src="../../../04_RECURSOS/Logos/Los%20Naranjos.png" class="loading-logo" alt="Logo">
+        <div style="text-align: center; margin-bottom: 25px;">
+            <div style="font-size: 10px; color: var(--text-dim); font-weight: 700; letter-spacing: 2px; margin-bottom: 5px;">PROYECTO</div>
+            <div style="font-size: 24px; font-weight: 800; color: #fff;">Los Naranjos</div>
+        </div>
         <div class="loading-bar"><div class="loading-bar-inner"></div></div>
     </div>
 
