@@ -68,12 +68,13 @@
         .stat-label { font-size: 10px; text-transform: uppercase; color: var(--text-dim); font-weight: 600; letter-spacing: 0.5px; }
 
         /* Sync Indicator - Repositioned to avoid overlap */
+        /* Sync Indicator - Relocated to top for consistency */
         .sync-indicator { 
-            position: absolute; bottom: 165px; right: 15px; z-index: 1000; 
-            width: 50px; height: 50px; background: var(--surface); border-radius: 15px; 
-            display: flex; align-items: center; justify-content: center; 
-            border: 1px solid rgba(255,255,255,0.1); font-size: 20px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4); 
+            position: absolute; top: 15px; right: 15px; z-index: 1000; 
+            width: 28px; height: 28px; background: rgba(30,37,50,0.6); 
+            border-radius: 8px; display: flex; align-items: center; justify-content: center; 
+            border: 1px solid rgba(255,255,255,0.08); font-size: 12px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); backdrop-filter: blur(8px);
         }
         .sync-indicator--syncing { color: var(--primary); animation: spin 2s linear infinite; }
         .sync-indicator--online { color: var(--success); }
@@ -124,18 +125,15 @@
 
     <header class="app-header">
         <div class="header-content">
-            <a href="../../../clientes.html" class="back-btn"><i class="fa-solid fa-chevron-left"></i></a>
-            <div style="text-align: right;">
-                <div style="font-size: 11px; color: var(--text-dim);">PROYECTO</div>
-                <div style="font-size: 18px; font-weight: 800;">Los Encinos</div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <a href="../../../02_GESTION/index.html" class="back-btn" style="width: 36px; height: 36px; border-radius: 10px;"><i class="fa-solid fa-chevron-left"></i></a>
+                <div style="display: flex; flex-direction: column;">
+                    <div style="font-size: 8px; color: var(--text-dim); font-weight: 700; letter-spacing: 0.5px;">PROYECTO</div>
+                    <div style="font-size: 14px; font-weight: 800; color: #fff;">Los Encinos</div>
+                </div>
             </div>
         </div>
     </header>
-
-    <div class="search-container">
-        <input type="text" id="search-input" class="search-input" placeholder="Buscar lote..." inputmode="numeric">
-        <button id="search-btn" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
-    </div>
 
     <button id="fab-locate" class="fab fab--locate"><i class="fa-solid fa-location-crosshairs"></i></button>
     <div id="sync-indicator" class="sync-indicator"><i class="fa-solid fa-cloud"></i></div>
