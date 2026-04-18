@@ -410,8 +410,13 @@
 
     function locateUser() {
         const btn = document.getElementById('fab-locate');
-        btn.classList.add('locating');
-        map.locate({ setView: true, maxZoom: 18 });
+        if (btn) btn.classList.add('locating');
+        map.locate({ 
+            setView: true, 
+            maxZoom: 18,
+            enableHighAccuracy: true,
+            timeout: 10000
+        });
     }
 
     function onLocationFound(e) {
