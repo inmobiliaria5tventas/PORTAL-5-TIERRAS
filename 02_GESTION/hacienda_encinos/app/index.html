@@ -44,17 +44,9 @@
         .header-content { display: flex; align-items: center; justify-content: space-between; pointer-events: auto; }
         .back-btn { background: var(--surface); width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; text-decoration: none; color: white; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
 
-        .search-container {
-            position: absolute; top: 65px; left: 15px; z-index: 1000;
-            display: flex; gap: 8px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
-            width: calc(100% - 150px); max-width: 250px;
-        }
-        .search-input { flex: 1; height: 36px; background: var(--surface); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 0 12px; color: white; font-size: 14px; font-family: inherit; }
-        .search-btn { width: 36px; height: 36px; background: var(--primary); border: none; border-radius: 10px; color: white; font-size: 16px; }
-
-        /* Tools Row - To the right of Search */
+        /* Tools Row - Relocated after removing search */
         .header-tools {
-            position: absolute; top: 65px; right: 15px; z-index: 1000;
+            position: absolute; top: 15px; right: 65px; z-index: 1000;
             display: flex; gap: 8px; align-items: center;
         }
 
@@ -230,22 +222,23 @@
         .loading-bar-inner { width: 0%; height: 100%; background: var(--primary); transition: width 0.4s ease; }
 
         /* Sync Indicator - Moved to avoid overlap */
+        /* Sync Indicator - Grouped with tools */
         .sync-indicator { 
             position: absolute; 
             top: 15px; 
-            right: 230px; /* Shifted left to clear project info */
+            right: 15px; 
             z-index: 1000; 
-            width: 36px; 
-            height: 36px; 
-            background: rgba(30, 41, 59, 0.8); 
+            width: 28px; 
+            height: 28px; 
+            background: rgba(30, 41, 59, 0.6); 
             backdrop-filter: blur(8px);
-            border-radius: 10px; 
+            border-radius: 8px; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            border: 1px solid rgba(255,255,255,0.1); 
-            font-size: 16px; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3); 
+            border: 1px solid rgba(255,255,255,0.08); 
+            font-size: 12px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
         }
         .sync-indicator--syncing { color: var(--primary); animation: spin 2s linear infinite; }
         .sync-indicator--online { color: var(--success); }
@@ -253,7 +246,7 @@
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
         /* Public Portal Link */
-        .public-link { background: rgba(34, 197, 94, 0.1); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.2); padding: 8px 12px; border-radius: 10px; font-size: 12px; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; transition: 0.2s; pointer-events: auto; }
+        .public-link { background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.2); padding: 5px 10px; border-radius: 8px; font-size: 10px; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: 0.2s; pointer-events: auto; }
         .public-link:hover { background: rgba(34, 197, 94, 0.2); }
     </style>
 </head>
@@ -275,16 +268,11 @@
         </div>
     </header>
 
-    <div class="search-container">
-        <input type="text" id="search-input" class="search-input" placeholder="Lote..." inputmode="numeric">
-        <button id="search-btn" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
-    </div>
-
     <div class="header-tools">
-        <a href="../../../01_CLIENTES/hacienda_encinos/app/index.html" target="_blank" class="public-link" style="padding: 6px 10px; font-size: 10px; border-radius: 8px; background: rgba(34, 197, 94, 0.2);">
+        <a href="../../../01_CLIENTES/hacienda_encinos/app/index.html" target="_blank" class="public-link" style="padding: 6px 12px; font-size: 11px; border-radius: 10px; background: rgba(34, 197, 94, 0.2);">
             <i class="fa-solid fa-external-link"></i> Público
         </a>
-        <button id="header-populate-btn" class="back-btn" title="Subir datos al Excel" style="width: 36px; height: 36px; border-radius: 10px; font-size: 14px; color: #818cf8; background: var(--surface);">
+        <button id="header-populate-btn" class="back-btn" title="Subir datos al Excel" style="width: 38px; height: 38px; border-radius: 12px; font-size: 16px; color: #818cf8; background: var(--surface);">
             <i class="fa-solid fa-cloud-arrow-up"></i>
         </button>
     </div>
