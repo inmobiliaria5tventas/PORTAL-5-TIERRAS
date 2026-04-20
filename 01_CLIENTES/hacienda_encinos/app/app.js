@@ -154,12 +154,12 @@
         highlightedLayer = layer;
         layer.setStyle({ weight: 3, fillOpacity: 0.8, color: '#fff' });
 
-        showDetails(feature.properties);
+        showDetails(feature.properties, layer.getBounds().getCenter());
         openBottomSheet();
         map.flyTo(layer.getBounds().getCenter(), 17, { duration: 0.5 });
     }
 
-    function showDetails(props) {
+    function showDetails(props, center) {
         const estado = props.estado || 'Disponible';
         const isVendida = estado === 'Vendida';
         
@@ -172,6 +172,14 @@
         const badge = document.getElementById('bs-current-status');
         badge.className = `bottomsheet__current-status bottomsheet__current-status--${estado.toLowerCase()}`;
         badge.innerHTML = `<span>●</span> ${estado}`;
+
+        // Update Navigation Links
+        if (center) {
+            const lat = center.lat;
+            const lng = center.lng;
+            document.getElementById('btn-nav-google').href = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+            document.getElementById('btn-nav-waze').href = `https://waze.com/ul?ll=${lat},${lng}&navigate=yes`;
+        }
     }
 
 
@@ -185,6 +193,8 @@
         document.getElementById('bottomsheet').classList.remove('active');
         document.getElementById('bottomsheet-overlay').classList.remove('active');
         document.querySelector('.stats-bar').classList.remove('hidden');
+        const navOpts = document.getElementById('nav-options');
+        if (navOpts) navOpts.classList.remove('active');
         if (highlightedLayer) {
             const colors = ESTADO_COLORS[highlightedLayer.feature.properties.estado] || ESTADO_COLORS['Disponible'];
             highlightedLayer.setStyle({ weight: 1.5, fillOpacity: colors.opacity, color: colors.stroke });
@@ -202,6 +212,14 @@
     function setupEventListeners() {
         document.getElementById('bs-close').addEventListener('click', closeBottomSheet);
         document.getElementById('bottomsheet-overlay').addEventListener('click', closeBottomSheet);
+        
+        const navMain = document.getElementById('btn-nav-main');
+        if (navMain) {
+            navMain.addEventListener('click', () => {
+                const opts = document.getElementById('nav-options');
+                if (opts) opts.classList.toggle('active');
+            });
+        }
         
         const locateBtn = document.getElementById('fab-locate');
         if (locateBtn) locateBtn.addEventListener('click', locateUser);
