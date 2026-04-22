@@ -306,6 +306,22 @@
         const locateBtn = document.getElementById('fab-locate');
         if (locateBtn) locateBtn.addEventListener('click', locateUser);
 
+        // Lógica para el botón de copiar link
+        const copyBtn = document.getElementById('copy-link-btn');
+        if (copyBtn) {
+            copyBtn.addEventListener('click', () => {
+                const publicLink = document.querySelector('.public-link');
+                if (publicLink) {
+                    const url = publicLink.href;
+                    navigator.clipboard.writeText(url).then(() => {
+                        showToast('✓ Link copiado al portapapeles', 'success');
+                    }).catch(err => {
+                        console.error('Error al copiar:', err);
+                    });
+                }
+            });
+        }
+
         // Comment toggle
         document.getElementById('comment-toggle-btn').addEventListener('click', () => {
             const btn = document.getElementById('comment-toggle-btn');
